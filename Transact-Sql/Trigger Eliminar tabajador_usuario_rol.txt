@@ -1,0 +1,11 @@
+alter TRIGGER TR_Eliminar_Usuario_Trabajador_Rol
+	ON Trabajador
+	FOR DELETE
+AS	
+	declare @identificacion varchar(12) select identificacion from deleted;
+	  BEGIN
+	  DELETE FROM Rol_Usuario WHERE idUsuario = @identificacion;
+	 DELETE FROM Usuario WHERE identificacion = @identificacion;
+									   	
+END
+GO

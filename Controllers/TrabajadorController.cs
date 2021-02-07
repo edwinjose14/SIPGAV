@@ -64,7 +64,7 @@ namespace SIPGAV.Controllers
                     var lst = db.Trabajadors.ToList();
                     Trabajador tr = lst.Where(d=>d.Identificacion==identificacion).FirstOrDefault();
                     oRespuesta.Exito = 1;
-                    oRespuesta.Mensaje = "Lista de Usuarios";
+                    oRespuesta.Mensaje = "Trabajador";
                     oRespuesta.Data = tr;
                 }
             }
@@ -134,10 +134,10 @@ namespace SIPGAV.Controllers
             {
                 using (var transsacion = db.Database.BeginTransaction())
                 {
-                    Trabajador trabajador = new Trabajador();
+                    //Trabajador trabajador = new Trabajador();
                     try
                     {
-                        trabajador = db.Trabajadors.Find(model.Identificacion);
+                        Trabajador trabajador = db.Trabajadors.Find(model.Identificacion);
                         trabajador = Map(model);
                         db.Entry(trabajador).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                         db.SaveChanges();
@@ -193,13 +193,13 @@ namespace SIPGAV.Controllers
             trabajador.Sexo = model.Sexo;
             trabajador.FechaNacimiento = model.FechaNacimiento;
             trabajador.Edad = model.CalcularEdad();
+            trabajador.Telefono = model.Telefono;
             trabajador.Correo = model.Correo;
             trabajador.Password = Encriptar.GetSHA256(model.Password);
-            trabajador.Telefono = model.Telefono;
             trabajador.Eps = model.Eps;
-            trabajador.Estado = "Activo";
-            trabajador.Salario = 2000;
             trabajador.FechaIngreso = DateTime.Now;
+            trabajador.Estado = "Activo";
+            trabajador.Salario = model.CalcularSalario();
             trabajador.Foto = UploadPhoto();
 
             return trabajador;

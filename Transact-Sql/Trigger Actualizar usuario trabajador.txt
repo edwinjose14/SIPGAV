@@ -1,0 +1,43 @@
+alter TRIGGER TR_ActualizarUsuario_Trabajador
+	ON Trabajador
+	FOR UPDATE
+AS	
+
+	IF(UPDATE(primerApellido) or UPDATE(segundoApellido) or UPDATE(nombres) or
+	   UPDATE(telefono) or UPDATE(correo) or UPDATE(password) or
+	   UPDATE(fechaIngreso) or UPDATE(foto))
+	declare @identificacion varchar(12),
+		@primerApellido varchar(20)
+      ,@segundoApellido varchar(20)
+      ,@nombres varchar(50)
+      ,@telefono1 varchar(12)
+      ,@correo varchar(100)
+      ,@password varchar(100)
+      ,@fechaIngreso datetime
+      ,@foto varchar(100)
+	  select @identificacion=identificacion,
+	  @primerApellido = primerApellido,
+	  @segundoApellido = segundoApellido,
+	  @nombres = nombres,
+	  @telefono1 = telefono,
+	  @correo = correo,
+	  @password = password,
+	  @fechaIngreso = fechaIngreso,
+	  @foto = foto
+	  from Trabajador;
+
+	  BEGIN
+	  UPDATE Usuario SET 
+						  primerApellido = @primerApellido,
+						  segundoApellido = @segundoApellido,
+						  nombres = @nombres,
+						  numeroFincas = 0,
+						  telefono1 = @telefono1,
+						  correo = @correo,
+						  password = @password,
+						  fechaIngreso = @fechaIngreso,
+						  foto = @foto
+				WHERE identificacion = @identificacion;
+									   	
+END
+GO

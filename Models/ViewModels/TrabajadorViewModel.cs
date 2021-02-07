@@ -18,8 +18,8 @@ namespace SIPGAV.Models.ViewModels
         public string Correo { get; set; }
         public string Password { get; set; }
         public string Eps { get; set; }
-        //public int HorasTrabajadas { get; set; }
-        //public decimal ValorxHora { get; set; }
+        public int HorasTrabajadas { get; set; }
+        public decimal ValorxHora { get; set; }
         public string Foto { get; set; } 
 
         public int CalcularEdad()
@@ -32,13 +32,13 @@ namespace SIPGAV.Models.ViewModels
             return edad;
         }
 
-        //public decimal CalcularSalario()
-        //{
-        //    decimal salario = 0;
+        public decimal CalcularSalario()
+        {
+            decimal salario = 0;
 
-        //    salario = HorasTrabajadas * ValorxHora;
-            
-        //    return salario;
-        //}
+            salario = HorasTrabajadas * ValorxHora;
+
+            return salario;
+        }
     }
 }
