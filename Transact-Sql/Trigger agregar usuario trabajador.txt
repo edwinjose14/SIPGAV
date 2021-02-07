@@ -1,0 +1,48 @@
+alter TRIGGER TR_AgregarUsuario_Trabajador
+	ON Trabajador
+	FOR INSERT
+AS	
+	declare @identificacion varchar(12),
+		@primerApellido varchar(20)
+      ,@segundoApellido varchar(20)
+      ,@nombres varchar(50)
+      ,@telefono1 varchar(12)
+      ,@correo varchar(100)
+      ,@password varchar(100)
+      ,@fechaIngreso datetime
+      ,@foto varchar(100)
+	  select @identificacion=identificacion,
+	  @primerApellido = primerApellido,
+	  @segundoApellido = segundoApellido,
+	  @nombres = nombres,
+	  @telefono1 = telefono,
+	  @correo = correo,
+	  @password = password,
+	  @fechaIngreso = fechaIngreso,
+	  @foto = foto
+	  from Trabajador;
+
+	  BEGIN
+	  INSERT INTO Usuario(identificacion,
+						  primerApellido,
+						  segundoApellido,
+						  nombres,
+						  numeroFincas,
+						  telefono1,
+						  correo,
+						  password,
+						  fechaIngreso,
+						  foto) VALUES(@identificacion,
+									   @primerApellido,
+									   @segundoApellido,
+									   @nombres,
+									   0,
+									   @telefono1,
+									   @correo,
+									   @password,
+									   @fechaIngreso,
+									   @foto);
+
+		insert into Rol_Usuario values(3, @identificacion);
+END
+GO
