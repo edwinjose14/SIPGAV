@@ -14,7 +14,7 @@ namespace SIPGAV.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        /*
+        
         private IUsuarioServices usuarioServices;
         public LoginController(IUsuarioServices services)
         {
@@ -39,6 +39,6 @@ namespace SIPGAV.Controllers
 
             return Ok(respuesta);
         }
-        */
+        
     }
 }

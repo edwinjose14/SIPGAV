@@ -138,7 +138,8 @@ namespace SIPGAV.Controllers
                     try
                     {
                         Trabajador trabajador = db.Trabajadors.Find(model.Identificacion);
-                        trabajador = Map(model);
+                        MapUpdate(model, trabajador);
+
                         db.Entry(trabajador).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                         db.SaveChanges();
                         transsacion.Commit();
@@ -153,6 +154,25 @@ namespace SIPGAV.Controllers
                     return Ok(respuesta);
                 }
             }
+        }
+
+        private void MapUpdate(TrabajadorViewModel model, Trabajador trabajador)
+        {
+            trabajador.IdFinca = model.IdFinca;
+            trabajador.PrimerApellido = model.PrimerApellido;
+            trabajador.SegundoApellido = model.SegundoApellido;
+            trabajador.Nombres = model.Nombres;
+            trabajador.Sexo = model.Sexo;
+            trabajador.FechaNacimiento = model.FechaNacimiento;
+            trabajador.Edad = model.CalcularEdad();
+            trabajador.Telefono = model.Telefono;
+            trabajador.Correo = model.Correo;
+            trabajador.Password = Encriptar.GetSHA256(model.Password);
+            trabajador.Eps = model.Eps;
+            trabajador.FechaIngreso = DateTime.Now;
+            trabajador.Estado = "Activo";
+            trabajador.Salario = model.CalcularSalario();
+            trabajador.Foto = UploadPhoto();
         }
 
         [HttpDelete("{identificacion}")]
@@ -185,6 +205,7 @@ namespace SIPGAV.Controllers
         public Trabajador Map(TrabajadorViewModel model)
         {
             Trabajador trabajador = new Trabajador();
+
             trabajador.Identificacion = model.Identificacion;
             trabajador.IdFinca = model.IdFinca;
             trabajador.PrimerApellido = model.PrimerApellido;

@@ -7,6 +7,7 @@ namespace SIPGAV.Models.ViewModels
 {
     public class MaquinaViewModel
     {
+        public int Id { get; set; }
         public string IdFinca { get; set; }
         public string TipoMaquina { get; set; }
         public string Cilindraje { get; set; }
