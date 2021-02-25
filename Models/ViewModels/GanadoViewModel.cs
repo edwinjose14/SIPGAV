@@ -7,6 +7,7 @@ namespace SIPGAV.Models.ViewModels
 {
     public class GanadoViewModel
     {
+        public  int Id {get; set; }
         public string IdFinca { get; set; }
         public string TipoAnimal { get; set; }
         public string Raza { get; set; }
