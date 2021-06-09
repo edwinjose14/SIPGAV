@@ -1,0 +1,156 @@
+<h1 mat-dialog-title>{{trabajador != null ? 'Editar Trabajador' : 'Agregar trabajador'}} <mat-icon fxFlex fxLayout="row" fxLayoutAlign="flex-end" (click)=closeModal()>clear</mat-icon></h1>
+
+
+<fomr mat-dialog-content>
+
+  <mat-grid-list cols="4" rowHeight="70px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Identificacion</mat-label>
+        <input matInput  [(ngModel)]="identificacion">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Primer Apellido</mat-label>
+        <input matInput  [(ngModel)]="primerApellido">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="6">
+        <img src="./assets/Photos/d7831841-d8fc-4d05-878a-4ea85ec05005DIPLOMA.jpg" width="350" height="350">
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Segundo Apellido</mat-label>
+        <input matInput  [(ngModel)]="segundoApellido">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Nombres</mat-label>
+        <input matInput  [(ngModel)]="nombres">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Sexo</mat-label>
+        <mat-select [(ngModel)]="sexo" >
+          <mat-option value="M">
+            Masculino
+          </mat-option>
+          <mat-option value="F">
+            Femenino
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input type="date" matInput  [(ngModel)]="fechaNacimiento" (blur)="CalculateAge()">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Edad</mat-label>
+        <input matInput  [(ngModel)]="edad" readonly>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Telefono</mat-label>
+        <input matInput  [(ngModel)]="telefono">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Correo</mat-label>
+        <input matInput  [(ngModel)]="correo">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput  [(ngModel)]="password">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>EPS</mat-label>
+        <input matInput  [(ngModel)]="eps">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha de Ingreso</mat-label>
+        <input type="date" matInput  [(ngModel)]="fechaIngreso">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Salario</mat-label>
+        <input matInput  [(ngModel)]="salario">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="example-full-width">
+        <mat-label>Estado</mat-label>
+        <input matInput  [(ngModel)]="estado" >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+
+
+      <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+      <button type="button" class="btn btn-success" (click)="file.click()">Upload File </button>
+
+
+    <div class="col-md-4">
+      <span class="upload" *ngIf="progress > 0">
+        {{progress}}%
+      </span>
+      <span class="upload" *ngIf="message">
+        {{message}}
+      </span>
+    </div>
+
+    <div class="col-md-5" *ngIf="progress > 0">
+      <div class="progress form-group" *ngIf="progress > 0">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+          {{progress}}%
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+</mat-grid-tile>
+
+  </mat-grid-list>
+
+</fomr>
+
+
+
+
+<div mat-dialog-action>
+<button mat-raised-button color="warn" (click)=closeModal()>Cancelar</button>
+<button mat-raised-button color="prymary"
+(click)="trabajador!=null ? editTrabajador() : addTrabajador()">Guardar</button>
+</div>

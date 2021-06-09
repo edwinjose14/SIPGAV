@@ -114,9 +114,12 @@ namespace SIPGAV.Controllers
                 var postedFile = httpRequest.Files[0];
                 filename = Guid.NewGuid().ToString() + postedFile.FileName;
                 var physicalPath = _env.ContentRootPath + "/Files/Photos/" + filename;
+                var assets = @"C:\Users\edwhe\Desktop\Proyectos\SIPGAV\ClientApp\src\assets\Photos\"+filename;
                 using (var stream = new FileStream(physicalPath, FileMode.Create))
                 {
                     postedFile.CopyTo(stream);
+                    postedFile.CopyTo(new FileStream(assets, FileMode.Create));
+                    
                 }
             }
             catch (Exception)

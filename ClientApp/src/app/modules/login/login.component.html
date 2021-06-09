@@ -1,0 +1,20 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<mat-card *ngIf="!loading" >
+  <mat-card-title>
+    <h2>Log In</h2>
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="formLogin" (ngSubmit)="Login()">
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" formControlName="correo" required>
+      </mat-form-field>
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="Password" formControlName="password" required>
+      </mat-form-field>
+      <div>
+       <button  mat-raised-button color="primary" type="submit" [disabled]="!formLogin.valid">Login</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

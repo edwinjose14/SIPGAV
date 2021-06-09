@@ -19,16 +19,9 @@
                   </button>
               </li>
               <li>
-                  <button mat-button [matMenuTriggerFor]="menu">
-                      <mat-icon>person_outline</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu">
-                      <button mat-menu-item>
-                          <mat-icon>exit_to_app</mat-icon>
-                          Cerrar Sesión
-                      </button>
-                  </mat-menu>
-
+                <button mat-icon-button (click)=logout()>
+                  <mat-icon matTooltip="Cerrar Sesion">logout</mat-icon>
+              </button>
               </li>
           </ul>
       </div>
